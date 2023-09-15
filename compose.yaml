@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    links:
+      - "database"
+    ports:
+      - "8000:3000"
+    volumes:
+      - ".:/app:rw"
+      - "/Users/wongchunwai/projects/data/downloads:/usr/src/app/downloads:rw"
+      - "/Users/wongchunwai/projects/data/logs:/usr/src/app/logs:rw"
+    environment:
+      DB_URL: "mongodb://database"
+  database:
+    image: "mongo:latest"
+    volumes:
+      - ".:/app:rw"
